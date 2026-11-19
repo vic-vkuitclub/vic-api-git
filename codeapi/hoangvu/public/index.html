@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hoàng Vũ · Quản lý sản phẩm</title>
+  <meta name="description" content="Trang quản lý sản phẩm của Hoàng Vũ — thêm, sửa, xóa sản phẩm qua REST API.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/common.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-icon">🛍️</span>
+        <span class="brand-name">ProductHub</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/" class="nav-link">← Trang chủ</a>
+        <a href="/practice/" class="nav-link">📋 Đề thực hành</a>
+      </nav>
+      <div class="sidebar-footer">
+        <span class="author-badge">Hoàng Vũ</span>
+        <p class="sidebar-note">Dữ liệu dùng chung cả CLB. Thay đổi ảnh hưởng tới mọi người.</p>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <header class="page-header">
+        <div class="header-left">
+          <h1 class="page-title">Quản lý sản phẩm</h1>
+          <p class="page-subtitle">GET · POST · PATCH · DELETE</p>
+        </div>
+        <div class="header-right">
+          <p id="status" role="status" aria-live="polite" class="status-bar">Đang chuẩn bị…</p>
+          <button class="btn-reload" id="reload" type="button" title="Tải lại dữ liệu">
+            <span class="reload-icon">↻</span> Tải lại
+          </button>
+        </div>
+      </header>
+
+      <fieldset id="workspace" class="workspace">
+        <legend class="visually-hidden">Quản lý sản phẩm</legend>
+
+        <!-- FORM PANEL -->
+        <section class="form-panel">
+          <div class="form-panel-header">
+            <h2 id="form-title" class="form-panel-title">✚ Thêm sản phẩm</h2>
+          </div>
+          <form id="product-form" class="product-form" autocomplete="off" novalidate>
+            <div class="field-group">
+              <label class="field-label" for="name">Tên sản phẩm</label>
+              <input class="field-input" id="name" type="text" placeholder="VD: Áo thun VIC..." required maxlength="150">
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label class="field-label" for="price">Giá (VND)</label>
+                <input class="field-input" id="price" type="number" placeholder="0" required min="0" max="2147483647" step="1">
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="stock">Tồn kho</label>
+                <input class="field-input" id="stock" type="number" placeholder="0" required min="0" max="2147483647" step="1">
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn-primary" type="submit" id="submit-btn">💾 Lưu sản phẩm</button>
+              <button class="btn-ghost" id="cancel-edit" type="button" hidden>✕ Hủy sửa</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- PRODUCT GRID -->
+        <section class="products-section">
+          <div class="products-header">
+            <h2 class="products-title">Danh sách sản phẩm</h2>
+            <span id="product-count" class="product-count">— sản phẩm</span>
+          </div>
+          <div id="products-grid" class="products-grid" role="list" aria-label="Danh sách sản phẩm">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+          </div>
+        </section>
+
+      </fieldset>
+    </main>
+
+  </div>
+
+  <!-- MODAL SỬA -->
+  <div id="edit-modal" class="modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-title" class="modal-title">✏️ Sửa sản phẩm</h3>
+        <button class="modal-close" id="modal-close" type="button" aria-label="Đóng modal">✕</button>
+      </div>
+      <form id="edit-form" class="product-form" autocomplete="off" novalidate>
+        <div class="field-group">
+          <label class="field-label" for="edit-name">Tên sản phẩm</label>
+          <input class="field-input" id="edit-name" type="text" required maxlength="150">
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="edit-price">Giá (VND)</label>
+            <input class="field-input" id="edit-price" type="number" required min="0" max="2147483647" step="1">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="edit-stock">Tồn kho</label>
+            <input class="field-input" id="edit-stock" type="number" required min="0" max="2147483647" step="1">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" type="submit">💾 Lưu thay đổi</button>
+          <button class="btn-ghost" id="modal-cancel" type="button">Hủy</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
