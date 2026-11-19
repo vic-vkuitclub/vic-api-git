@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bài thực hành products · VIC Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/common.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="/assets/js/nav.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+  <header class="site-header"><nav class="nav" aria-label="Điều hướng chính">
+    <a class="brand" href="/">VIC <span>API &amp; Git Lab</span></a>
+    <button class="nav-menu" type="button" data-menu-toggle aria-controls="main-menu" aria-expanded="false">Menu</button>
+    <div class="nav-links" id="main-menu"><a href="/simulation/">Mô phỏng</a><a href="/practice/">Đề thực hành</a><a href="/">Trang chủ</a></div>
+    <span class="pill pill-green">Dữ liệu thật · dùng chung</span>
+  </nav></header>
+  <main class="container member-page" id="main-content">
+    <section class="member-intro"><span class="eyebrow">Bài cá nhân · API products</span><h1 class="page-title">Quản lý sản phẩm</h1><p class="lead">Bảng bên dưới đọc từ API riêng của bài này. Khi backend và hàm fetch được hoàn thành, dữ liệu sẽ lấy từ products chung của CLB.</p><div class="shared-warning"><strong>Dữ liệu chia sẻ:</strong> khi CRUD được triển khai, thao tác thêm/sửa/xóa ảnh hưởng đến mọi thành viên. GET lại để nhận thay đổi mới nhất. Chưa có API CRUD sẵn trong template.</div></section>
+    <section class="panel member-workspace" aria-labelledby="products-title">
+      <div class="workspace-heading"><div><span class="eyebrow">public.products</span><h2 id="products-title">Sản phẩm</h2></div><div class="workspace-actions"><button class="btn btn-secondary btn-small" id="refresh-products" type="button">Tải lại dữ liệu</button><button class="btn btn-small" id="show-create" type="button">Thêm sản phẩm</button></div></div>
+      <p id="app-status" class="status" role="status" aria-live="polite">TODO: tự viết hàm fetch để đọc danh sách từ backend.</p>
+      <form id="product-form" class="product-form" hidden>
+        <input type="hidden" id="editing-id">
+        <div class="form-heading"><h3 id="form-title">Thêm sản phẩm</h3><button id="close-form" class="text-button" type="button">Đóng</button></div>
+        <div class="form-grid"><label for="name">Tên sản phẩm<input id="name" name="name" maxlength="150" required></label><label for="price">Giá (VND)<input id="price" name="price" type="number" min="0" max="2147483647" step="1" required></label><label for="stock">Tồn kho<input id="stock" name="stock" type="number" min="0" max="2147483647" step="1" required></label></div>
+        <div class="form-actions"><button class="btn" type="submit">Lưu sản phẩm</button><span class="muted">TODO: gửi request qua API backend.</span></div>
+      </form>
+      <div class="products-table-wrap"><table class="products-table"><thead><tr><th>ID</th><th>Tên</th><th>Giá</th><th>Tồn kho</th><th><span class="visually-hidden">Hành động</span></th></tr></thead><tbody id="products-body"><tr><td colspan="5" class="empty-row">Chưa có dữ liệu. Hoàn thành GET ở backend và hàm fetch tại frontend.</td></tr></tbody></table></div>
+      <p class="table-note">Sau mỗi mutation, gọi GET lại để hiển thị dữ liệu chung mới nhất. Khi người khác xóa sản phẩm, API có thể trả 404.</p>
+    </section>
+    <p class="member-help">Xem <a href="/practice/">đề bài, API contract và hướng dẫn 60 phút</a>. Mở <code>backend/routes.js</code> và <code>public/app.js</code> để tự hoàn thành các TODO.</p>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><p>Template bài thành viên · CRUD thật để TODO</p><div class="footer-links"><a href="/">Trang chủ</a><a href="/practice/">Đề bài</a></div></div></footer>
+</body>
+</html>
