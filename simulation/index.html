@@ -61,16 +61,41 @@
 
       <div class="sim-right">
         <section class="panel db-panel" aria-labelledby="database-title">
-          <div class="panel-heading db-heading"><div><span class="eyebrow">State</span><h2 id="database-title">Database mô phỏng</h2></div><button class="btn btn-secondary btn-small" id="reset-button" type="button">Khôi phục mẫu</button></div>
+          <div class="panel-heading db-heading">
+            <div>
+              <span class="eyebrow">State</span>
+              <h2 id="database-title">Database mô phỏng</h2>
+            </div>
+            <button class="btn btn-secondary btn-small" id="reset-button" type="button">Khôi phục mẫu</button>
+          </div>
           <p class="db-caption">Bảng <code>public.products</code> · trạng thái trước và sau request</p>
-          <div class="db-snapshot"><div class="snapshot-title"><span>TRƯỚC</span><span id="before-count">6 sản phẩm</span></div><div class="table-scroll"><table><thead><tr><th>id</th><th>name</th><th>price</th><th>stock</th></tr></thead><tbody id="before-table"></tbody></table></div></div>
-          <div class="change-arrow" aria-hidden="true">↓</div>
-          <div class="db-snapshot"><div class="snapshot-title"><span>SAU</span><span id="after-count">6 sản phẩm</span></div><div class="table-scroll"><table><thead><tr><th>id</th><th>name</th><th>price</th><th>stock</th></tr></thead><tbody id="after-table"></tbody></table></div></div>
-          <div id="change-note" class="change-note">Chưa có thay đổi. GET chỉ đọc dữ liệu.</div>
-          <div class="legend"><span><i class="dot dot-added"></i> Thêm</span><span><i class="dot dot-updated"></i> Sửa</span><span><i class="dot dot-deleted"></i> Xóa</span></div>
-        </section>
 
-        <section class="panel flow-panel" aria-labelledby="flow-title"><span class="eyebrow">Đường đi của dữ liệu</span><h2 id="flow-title">Client → API → Database</h2><ol class="flow-list"><li><b>Request</b><span>method · path · body</span></li><li><b>Server</b><span>kiểm tra · chọn thao tác</span></li><li><b>Database giả</b><span>đọc hoặc thay đổi state</span></li><li><b>Response</b><span>status · dữ liệu · lỗi</span></li></ol></section>
+          <div class="db-snapshot">
+            <div class="snapshot-title"><span>TRƯỚC</span><span id="before-count">6 sản phẩm</span></div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>id</th><th>name</th><th>price</th><th>stock</th></tr></thead>
+                <tbody id="before-table"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="change-arrow" aria-hidden="true">↓</div>
+
+   
+          <div class="db-snapshot">
+            <div class="snapshot-title"><span>SAU</span><span id="after-count">6 sản phẩm</span></div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>id</th><th>name</th><th>price</th><th>stock</th></tr></thead>
+                <tbody id="after-table"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="change-note" class="change-note">Chưa có thay đổi. GET chỉ đọc dữ liệu.</div>
+          <div class="legend">...</div>
+        </section>
       </div>
     </section>
 
