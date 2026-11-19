@@ -1,0 +1,21 @@
+main { max-width: 900px; padding-block: 28px; }
+h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+h2 { font-size: 1.2rem; }
+.notice { padding: 12px; background: var(--blue-soft); border-left: 3px solid var(--blue); }
+#status { min-height: 28px; overflow-wrap: anywhere; }
+#status.error { color: var(--red); }
+fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+form { padding: 20px; }
+form h2 { margin-top: 0; }
+label { display: block; margin: 12px 0 6px; }
+input { width: 100%; min-height: 44px; padding: 8px; border: 1px solid var(--line); border-radius: 3px; }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-block: 16px; }
+[hidden] { display: none !important; }
+.table-scroll { overflow-x: auto; background: var(--surface); }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px; border-bottom: 1px solid var(--line); text-align: left; }
+td { overflow-wrap: anywhere; }
+th { white-space: nowrap; }
+td:last-child { min-width: 170px; }
+td .btn { margin: 3px; }
+@media (max-width: 600px) { table { min-width: 600px; } }
