@@ -1,0 +1,8 @@
+# Local plaintext input; distribute the encrypted config and .lab/config.key.
+/config/public-config.json
+/node_modules/
+npm-debug.log*
+.DS_Store
+
+# Project-local runtime downloaded by setup.cmd.
+/.tools/

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fafaf8">
+  <meta name="description" content="Phòng mô phỏng API và bài thực hành Node.js, Git của CLB VIC.">
+  <title>VIC API &amp; Git Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/common.css">
+  <script src="/assets/js/nav.js" defer></script>
+  <script src="/assets/js/home.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a class="brand" href="/">VIC <span>API &amp; Git Lab</span></a>
+      <button class="nav-menu" type="button" data-menu-toggle aria-controls="main-menu" aria-expanded="false">Menu</button>
+      <div class="nav-links" id="main-menu">
+        <a href="/simulation/">Mô phỏng</a>
+        <a href="/practice/">Thực hành</a>
+        <a href="#members">Bài thành viên</a>
+      </div>
+      <a class="btn btn-small nav-cta" href="/practice/">Bắt đầu bài tập</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="container section" aria-labelledby="hero-title" style="padding-top:76px">
+      <span class="eyebrow">Thực hành API · Node.js · Git</span>
+      <h1 class="page-title" id="hero-title" style="max-width:800px">Hiểu API.<br><span style="color:var(--blue)">Tự tay thực hành.</span></h1>
+      <p class="lead">Thử request với database giả, sau đó tự xây backend và giao diện quản lý sản phẩm cùng mọi người trong CLB.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:24px">
+        <a class="btn" href="/simulation/">Vào phòng mô phỏng <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-secondary" href="/practice/">Xem đề thực hành</a>
+      </div>
+      <p class="muted" style="margin-top:26px;max-width:680px"><span class="pill pill-blue">Dữ liệu tách biệt</span> Mô phỏng chỉ đổi dữ liệu trong trình duyệt. Phần thực hành dùng chung bảng products trên Supabase của CLB.</p>
+    </section>
+
+    <section class="container section" aria-labelledby="parts-heading">
+      <div class="section-heading"><div><span class="eyebrow">Lộ trình</span><h2 id="parts-heading">Hai phần, một luồng học</h2></div><p class="muted">Từ hiểu request đến tự xây API.</p></div>
+      <div class="card-grid">
+        <article class="panel info-card"><span class="pill pill-blue">01 · MÔ PHỎNG</span><h3>Thấy request thay đổi dữ liệu</h3><p>Chọn method, gửi JSON và quan sát response cùng database giả trước/sau.</p><a class="text-link" href="/simulation/">Mở phòng mô phỏng →</a></article>
+        <article class="panel info-card"><span class="pill pill-green">02 · THỰC HÀNH THẬT</span><h3>Tự viết cả backend và frontend</h3><p>Hoàn thành CRUD products trong Node.js; mọi thành viên đọc và cập nhật cùng dữ liệu.</p><a class="text-link" href="/practice/">Đọc đề và hợp đồng API →</a></article>
+      </div>
+    </section>
+
+    <section class="container section" id="members" aria-labelledby="members-heading">
+      <div class="section-heading"><div><span class="eyebrow">Gallery</span><h2 id="members-heading">Bài thực hành thành viên</h2></div><button class="btn btn-secondary btn-small" id="reload-members" type="button">Tải lại danh sách</button></div>
+      <p class="muted">Danh sách hiển thị các bài đã được mount khi server khởi động. Sau khi thêm folder hoặc sửa backend, restart server rồi tải lại danh sách. Có bài trong danh sách không đồng nghĩa chức năng CRUD đã hoàn thành.</p>
+      <div id="members-status" class="status" role="status" aria-live="polite">Đang tải danh sách…</div>
+      <div class="member-list" id="member-list"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-inner"><p>VIC API &amp; Git Lab · Bài tập dùng chung cho CLB</p><div class="footer-links"><a href="/simulation/">Mô phỏng</a><a href="/practice/">Thực hành</a></div></div></footer>
+</body>
+</html>

@@ -1,0 +1,28 @@
+.member-page { padding-top: 40px; }
+.member-intro { padding: 8px 0 12px; }
+.member-intro .lead { margin: 8px 0 0; }
+.member-intro .shared-warning { margin: 20px 0; max-width: 850px; }
+.member-workspace { padding: 20px; }
+.workspace-heading { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 8px; }
+.workspace-heading h2 { margin: 4px 0 0; font-size: 22px; letter-spacing: -.04em; }
+.workspace-heading .eyebrow { font-size: 10px; }
+.workspace-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.product-form { margin: 18px 0; padding: 16px; border: 1px solid var(--line); background: var(--surface-soft); }
+.product-form[hidden] { display: none; }
+.form-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.form-heading h3 { margin: 0 0 12px; font-size: 16px; }
+.text-button { min-height: 44px; border: 0; padding: 8px; color: var(--blue); background: none; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.form-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; }
+.form-grid label { display: grid; gap: 6px; font-size: 13px; font-weight: 650; }
+.form-grid input { min-width: 0; min-height: 44px; border: 1px solid var(--line); border-radius: 2px; padding: 8px 10px; background: white; }
+.form-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 14px; font-size: 12px; }
+.products-table-wrap { overflow-x: auto; margin-top: 14px; }
+.products-table { width: 100%; border-collapse: collapse; text-align: left; }
+.products-table th, .products-table td { padding: 12px 10px; border-bottom: 1px solid var(--line); }
+.products-table th { color: var(--muted); font-size: 12px; }
+.products-table td { font-size: 14px; }
+.products-table td:first-child { font-family: var(--mono); }
+.empty-row { padding: 26px 10px !important; text-align: center; color: var(--muted); }
+.table-note, .member-help { color: var(--muted); font-size: 13px; }
+.member-help { margin: 18px 0; }.member-help a { text-decoration-color: var(--blue); text-underline-offset: 3px; }
+@media (max-width: 650px) { .member-page { padding-top: 28px; }.member-workspace { padding: 14px; }.workspace-heading { align-items: flex-start; flex-direction: column; }.form-grid { grid-template-columns: 1fr; }.products-table { min-width: 620px; } }

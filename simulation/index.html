@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Thử API với request, response và database mô phỏng ngay trên trình duyệt.">
+  <title>Phòng mô phỏng API · VIC Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/common.css">
+  <link rel="stylesheet" href="/simulation/style.css">
+  <script src="/assets/js/nav.js" defer></script>
+  <script src="/simulation/simulator.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+  <header class="site-header"><nav class="nav" aria-label="Điều hướng chính">
+    <a class="brand" href="/">VIC <span>API &amp; Git Lab</span></a>
+    <button class="nav-menu" type="button" data-menu-toggle aria-controls="main-menu" aria-expanded="false">Menu</button>
+    <div class="nav-links" id="main-menu"><a href="/simulation/" aria-current="page">Mô phỏng</a><a href="/practice/">Thực hành</a><a href="/#members">Bài thành viên</a></div>
+    <a class="btn btn-small nav-cta" href="/">Trang chủ</a>
+  </nav></header>
+
+  <main class="container sim-page" id="main-content">
+    <div class="sim-heading"><div><span class="eyebrow">01 · Phòng thử</span><h1 class="page-title">Mô phỏng API</h1><p class="lead">Soạn request, dự đoán kết quả rồi quan sát database giả thay đổi.</p></div><span class="pill pill-blue">MÔ PHỎNG · không gọi Supabase</span></div>
+    <div class="sim-notice" role="note"><strong>Toàn bộ thao tác ở trang này chỉ đổi dữ liệu trong tab trình duyệt.</strong> Không có request nào được gửi đến Supabase hoặc URL bên ngoài. Tải lại trang sẽ khôi phục bộ dữ liệu mẫu.</div>
+
+    <section class="sim-grid" aria-label="Trình mô phỏng API">
+      <div class="sim-left">
+        <section class="panel sim-panel" aria-labelledby="request-title">
+          <div class="panel-heading"><div><span class="eyebrow">Request</span><h2 id="request-title">Soạn yêu cầu</h2></div><button class="btn btn-secondary btn-small" id="sample-button" type="button">Nạp mẫu</button></div>
+          <div class="request-line">
+            <label>Method<select id="method"><option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option></select></label>
+            <label>Endpoint<select id="endpoint-kind"><option value="list">Danh sách · /products</option><option value="detail">Chi tiết · /products/:id</option></select></label>
+          </div>
+          <label id="endpoint-id-row" class="endpoint-id-row" for="endpoint-id">ID sản phẩm<input id="endpoint-id" type="text" inputmode="numeric" value="1" autocomplete="off" aria-describedby="endpoint-id-help"></label>
+          <p id="endpoint-id-help" class="field-help">Nhập ID bất kỳ; nhập chữ hoặc để trống để thử lỗi ID.</p>
+          <div class="request-line request-line-secondary">
+            <label>Query tìm kiếm (q)<input id="query" type="search" placeholder="ví dụ: trà" autocomplete="off"></label>
+            <label>Tình huống<select id="scenario"><option value="normal">Request bình thường</option><option value="server">Lỗi server giả lập · 500</option><option value="network">Mất mạng giả lập</option></select></label>
+          </div>
+          <label class="body-label" for="body">Body · JSON <span class="muted">Content-Type: application/json</span></label>
+          <textarea id="body" spellcheck="false" rows="7" aria-describedby="body-help" placeholder='{"name":"Trà vải","price":22000,"stock":12}'></textarea>
+          <p id="body-help" class="field-help">POST/PATCH/PUT đọc JSON ở đây. GET và DELETE không cần body.</p>
+          <div class="request-actions"><button class="btn" id="send-button" type="button">Gửi request <span aria-hidden="true">→</span></button><span id="request-status" class="status" role="status" aria-live="polite">Sẵn sàng mô phỏng.</span></div>
+        </section>
+
+        <section class="panel response-panel" aria-labelledby="response-title">
+          <div class="panel-heading"><div><span class="eyebrow">Response</span><h2 id="response-title">Kết quả</h2></div><span id="response-status" class="status-badge">Chưa gửi</span></div>
+          <div class="response-summary" id="response-summary">Chọn request để bắt đầu.</div>
+          <pre class="json-output" id="response-body" tabindex="0" aria-label="Response JSON">// Chưa có response</pre>
+        </section>
+
+        <section class="panel history-panel" aria-labelledby="history-title">
+          <div class="panel-heading"><div><span class="eyebrow">Trong phiên</span><h2 id="history-title">Lịch sử request</h2></div><span id="history-count" class="pill">0 / 12</span></div>
+          <ol id="history-list" class="history-list"><li class="muted">Các lần gửi sẽ xuất hiện ở đây.</li></ol>
+        </section>
+      </div>
+
+      <div class="sim-right">
+        <section class="panel db-panel" aria-labelledby="database-title">
+          <div class="panel-heading db-heading"><div><span class="eyebrow">State</span><h2 id="database-title">Database mô phỏng</h2></div><button class="btn btn-secondary btn-small" id="reset-button" type="button">Khôi phục mẫu</button></div>
+          <p class="db-caption">Bảng <code>public.products</code> · trạng thái trước và sau request</p>
+          <div class="db-snapshot"><div class="snapshot-title"><span>TRƯỚC</span><span id="before-count">6 sản phẩm</span></div><div class="table-scroll"><table><thead><tr><th>id</th><th>name</th><th>price</th><th>stock</th></tr></thead><tbody id="before-table"></tbody></table></div></div>
+          <div class="change-arrow" aria-hidden="true">↓</div>
+          <div class="db-snapshot"><div class="snapshot-title"><span>SAU</span><span id="after-count">6 sản phẩm</span></div><div class="table-scroll"><table><thead><tr><th>id</th><th>name</th><th>price</th><th>stock</th></tr></thead><tbody id="after-table"></tbody></table></div></div>
+          <div id="change-note" class="change-note">Chưa có thay đổi. GET chỉ đọc dữ liệu.</div>
+          <div class="legend"><span><i class="dot dot-added"></i> Thêm</span><span><i class="dot dot-updated"></i> Sửa</span><span><i class="dot dot-deleted"></i> Xóa</span></div>
+        </section>
+
+        <section class="panel flow-panel" aria-labelledby="flow-title"><span class="eyebrow">Đường đi của dữ liệu</span><h2 id="flow-title">Client → API → Database</h2><ol class="flow-list"><li><b>Request</b><span>method · path · body</span></li><li><b>Server</b><span>kiểm tra · chọn thao tác</span></li><li><b>Database giả</b><span>đọc hoặc thay đổi state</span></li><li><b>Response</b><span>status · dữ liệu · lỗi</span></li></ol></section>
+      </div>
+    </section>
+
+    <section class="section challenge-section" aria-labelledby="challenge-title"><div class="section-heading"><div><span class="eyebrow">Thử thách nhanh</span><h2 id="challenge-title">Đoán trước khi gửi</h2></div><p class="muted">Chọn một tình huống rồi giải thích status và tác động.</p></div>
+      <div class="challenge-grid">
+        <article class="panel challenge"><span class="pill">01 · GET</span><h3>Đọc danh sách</h3><p>GET <code>/products?q=trà</code>. Response có gì thay đổi trong database?</p><button type="button" class="text-button" data-challenge="get">Nạp tình huống</button></article>
+        <article class="panel challenge"><span class="pill">02 · PATCH</span><h3>Sửa một trường</h3><p>Đổi stock của id 2. Name và price sau request sẽ ra sao?</p><button type="button" class="text-button" data-challenge="patch">Nạp tình huống</button></article>
+        <article class="panel challenge"><span class="pill">03 · DELETE</span><h3>Xóa một bản ghi</h3><p>DELETE id 6. Vì sao response 204 không có JSON body?</p><button type="button" class="text-button" data-challenge="delete">Nạp tình huống</button></article>
+        <article class="panel challenge"><span class="pill">04 · LỖI</span><h3>Phân biệt lỗi</h3><p>So sánh JSON sai cú pháp (400) với mất mạng (không có HTTP status).</p><button type="button" class="text-button" data-challenge="invalid">Nạp tình huống</button></article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><p>Phòng mô phỏng · state chỉ nằm trong bộ nhớ của tab</p><div class="footer-links"><a href="/">Trang chủ</a><a href="/practice/">Đề thực hành</a></div></div></footer>
+</body>
+</html>

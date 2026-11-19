@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Đề thực hành API và Git trong 60 phút cho CLB VIC.">
+  <title>Đề thực hành · VIC Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/common.css">
+  <link rel="stylesheet" href="/practice/style.css">
+  <script src="/assets/js/nav.js" defer></script>
+  <script src="/practice/practice.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Bỏ qua điều hướng</a>
+  <header class="site-header"><nav class="nav" aria-label="Điều hướng chính">
+    <a class="brand" href="/">VIC <span>API &amp; Git Lab</span></a>
+    <button class="nav-menu" type="button" data-menu-toggle aria-controls="main-menu" aria-expanded="false">Menu</button>
+    <div class="nav-links" id="main-menu"><a href="/simulation/">Mô phỏng</a><a href="/practice/" aria-current="page">Thực hành</a><a href="/#members">Bài thành viên</a></div>
+    <a class="btn btn-small nav-cta" href="#checklist">Xem checklist</a>
+  </nav></header>
+  <main class="container practice-page" id="main-content">
+    <section class="practice-intro"><span class="eyebrow">02 · Bài làm thật · 60 phút</span><h1 class="page-title">Quản lý sản phẩm VIC</h1><p class="lead">Mỗi người tự hoàn thành cả backend Node.js và frontend gọi backend. Mọi bài dùng chung products nên thay đổi của thành viên khác sẽ thấy khi tải lại.</p><div class="practice-badges"><span class="pill pill-green">Supabase thật · dùng chung CLB</span><span class="pill">Không chia dữ liệu theo slug</span></div></section>
+    <div class="shared-warning" role="note"><strong>Cẩn thận khi thử nghiệm:</strong> POST/PATCH/DELETE sau khi bạn tự hoàn thành API sẽ thay đổi dữ liệu thật mà cả CLB đang dùng. Không chạy seed/reset và không gửi dữ liệu thử nghiệm nhạy cảm. Tải lại trang sẽ gọi GET từ backend để xem trạng thái mới nhất.</div>
+    <div class="practice-layout">
+      <div class="practice-main">
+        <section class="panel practice-section" aria-labelledby="goal-title"><span class="eyebrow">Mục tiêu</span><h2 id="goal-title">Một bảng, đủ luồng CRUD</h2><p>Yêu cầu chính: GET danh sách, POST, PATCH và DELETE. Frontend gửi dữ liệu đến API riêng trong thư mục bài của bạn. Backend kiểm tra dữ liệu rồi thao tác bảng <code>public.products</code> qua Supabase.</p><div class="callout"><b>Luồng bắt buộc</b><br>Browser → API Node.js do bạn viết → Supabase → response → giao diện. Không gọi Supabase trực tiếp từ browser; không dùng mảng hoặc localStorage làm nguồn sự thật.</div></section>
+        <section class="panel practice-section" aria-labelledby="contract-title"><span class="eyebrow">Hợp đồng API</span><h2 id="contract-title">Endpoint cần hoàn thành</h2><p>Các endpoint dưới đây là yêu cầu chính trong bài 60 phút.</p><div class="contract-table-wrap"><table class="contract-table"><thead><tr><th>Method</th><th>Path</th><th>Yêu cầu</th><th>Thành công</th></tr></thead><tbody>
+          <tr><td><span class="method get">GET</span></td><td><code>/api/products</code></td><td>Đọc danh sách chung</td><td>200 · mảng JSON</td></tr>
+          <tr><td><span class="method post">POST</span></td><td><code>/api/products</code></td><td>Body: name, price, stock</td><td>201 · sản phẩm mới</td></tr>
+          <tr><td><span class="method patch">PATCH</span></td><td><code>/api/products/:id</code></td><td>Sửa một hoặc nhiều trường</td><td>200 · sản phẩm sau sửa</td></tr>
+          <tr><td><span class="method delete">DELETE</span></td><td><code>/api/products/:id</code></td><td>Xóa đúng id</td><td>204 · không có body</td></tr>
+        </tbody></table></div><p class="muted">Lỗi dùng JSON nhất quán, ví dụ <code>{"error":{"code":"VALIDATION_ERROR","message":"Thông tin không hợp lệ"}}</code>. Dùng 400 cho input sai, 404 khi không có id, 500 cho lỗi server. Backend vẫn phải validate dù form có kiểm tra cơ bản.</p><details><summary>Bài mở rộng sau khi yêu cầu chính chạy</summary><p>Thêm <code>GET /api/products/:id</code>, PUT yêu cầu đầy đủ trường, và tìm kiếm <code>?q=</code>. Query tìm kiếm phải do backend chuyển thành điều kiện truy vấn, không tải toàn bảng về rồi lọc ở frontend.</p></details></section>
+        <section class="panel practice-section" aria-labelledby="schema-title"><span class="eyebrow">Database có sẵn</span><h2 id="schema-title">Bảng products</h2><div class="schema-scroll"><table class="schema-table"><thead><tr><th>Cột</th><th>Kiểu</th><th>Quy tắc</th><th>Frontend gửi?</th></tr></thead><tbody><tr><td><code>id</code></td><td>bigint</td><td>Identity, primary key</td><td>Không</td></tr><tr><td><code>category_id</code></td><td>bigint</td><td>FK đến categories, cố định theo config</td><td>Không</td></tr><tr><td><code>name</code></td><td>text</td><td>1–150 ký tự sau trim</td><td>Có</td></tr><tr><td><code>price</code></td><td>integer</td><td>Số nguyên từ 0 đến 2.147.483.647, đơn vị VND</td><td>Có</td></tr><tr><td><code>stock</code></td><td>integer</td><td>Số nguyên từ 0 đến 2.147.483.647</td><td>Có</td></tr></tbody></table></div><p>Categories đã có sẵn để làm dữ liệu tham chiếu. Bài nhập môn không làm CRUD danh mục; backend đọc <code>LAB_CATEGORY_ID</code> từ cấu hình chung và tự gán khi tạo. Response API dùng <code>categoryId</code>; tên cột database nội bộ vẫn là <code>category_id</code>.</p></section>
+        <section class="panel practice-section" id="checklist" aria-labelledby="checklist-title"><span class="eyebrow">Kế hoạch 60 phút</span><h2 id="checklist-title">Làm theo từng chặng</h2><ol class="timeline"><li><b>0–8 phút · Chạy project</b><span>Tạo branch feature, chạy server, mở bài trong <code>codeapi/&lt;slug&gt;/</code>. Agent được phép hỗ trợ nhưng hãy nêu rõ phần bạn chưa hiểu.</span></li><li><b>8–18 phút · GET</b><span>Tự viết hàm fetch GET; khi mở trang hãy tải dữ liệu và render loading, rỗng, lỗi cùng bảng sản phẩm.</span></li><li><b>18–32 phút · POST</b><span>Viết route POST và hàm fetch tạo sản phẩm; validate ở backend, gán category_id từ config. Sau response 201, gọi GET lại.</span></li><li><b>32–45 phút · PATCH</b><span>Viết route PATCH và hàm fetch sửa một hoặc nhiều trường. Khi submit, phân biệt tạo/sửa theo trạng thái form. Sau response 200, gọi GET lại.</span></li><li><b>45–53 phút · DELETE</b><span>Render bảng từ response API, xác nhận trước khi xóa; trả 204 không body. Sau đó GET lại và báo lỗi nếu người khác đã xóa trước.</span></li><li><b>53–60 phút · Git và review</b><span>Hoàn thiện trạng thái loading/lỗi, chạy kiểm tra cơ bản, commit rõ, push branch, mở PR. Giải thích một request và một quyết định trong code.</span></li></ol></section>
+        <section class="panel practice-section" aria-labelledby="agent-title"><span class="eyebrow">Làm cùng Agent</span><h2 id="agent-title">Giao việc nhỏ, kiểm tra lại</h2><ul class="plain-list"><li>Yêu cầu Agent giải thích API contract trước khi sửa code.</li><li>Chỉ định rõ file bạn đang làm trong thư mục cá nhân; không sửa router hoặc bài của người khác.</li><li>Nhờ hoàn thành một endpoint, đọc diff, tự chạy request và yêu cầu Agent giải thích status/error.</li><li>Không đưa key, mật khẩu hoặc file cấu hình vào prompt, log hay ảnh chụp.</li><li>Mỗi người vẫn phải tự viết backend và phần frontend gọi backend; scaffold có TODO, không có lời giải hoàn chỉnh.</li></ul></section>
+      </div>
+      <aside class="practice-aside">
+        <section class="panel aside-card"><span class="pill pill-blue">Chuẩn bị</span><h2>Chạy app chung</h2><ol><li>Node.js 22 trở lên</li><li><code>npm ci</code></li><li><code>npm run member -- ten-cua-ban</code></li><li><code>npm start</code></li></ol><p class="muted">Lệnh tạo bài chỉ tạo folder/template. Nếu server đang chạy, hãy restart để mount backend và đưa bài vào gallery. Không cần điền env; cấu hình lab đã được mã hóa trong repo.</p></section>
+        <section class="panel aside-card"><span class="pill">Git flow</span><h2>Nhánh ngắn, PR rõ</h2><pre>git switch -c feature/&lt;slug&gt;-products
+# code + kiểm tra
+git add codeapi/&lt;slug&gt;
+git commit -m "feat: add products CRUD"
+git push -u origin HEAD</pre><p>Mở Pull Request về <code>main</code>, mời một bạn review. Không commit cấu hình riêng hoặc sửa bài của bạn khác.</p></section>
+        <section class="panel aside-card"><span class="pill pill-green">Chia sẻ database</span><h2>Mọi người thấy cùng dữ liệu</h2><p>Slug chỉ chia code và URL. Tất cả API dùng cùng products, không lọc theo thành viên. Sau khi người khác thêm/sửa/xóa, nút GET lại sẽ đọc trạng thái mới.</p><a class="btn btn-secondary btn-small" href="/simulation/">Ôn request trước →</a></section>
+        <section class="panel aside-card"><span class="pill">Bắt đầu</span><h2>Mở bộ khung của bạn</h2><p>Tạo slug bằng chữ thường không dấu, số và dấu gạch ngang.</p><div class="starter-code">npm run member -- ten-cua-ban</div><p><a href="/">Quay lại trang chủ để mở bài</a></p></section>
+      </aside>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><p>Thực hành thật · mọi mutation đi qua API thành viên</p><div class="footer-links"><a href="/">Trang chủ</a><a href="/simulation/">Mô phỏng</a></div></div></footer>
+</body>
+</html>

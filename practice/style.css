@@ -1,0 +1,40 @@
+.practice-page { padding-top: 44px; }
+.practice-intro { padding: 10px 0 20px; }
+.practice-intro .page-title { margin-bottom: 10px; }
+.practice-intro .lead { margin: 0; }
+.practice-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.shared-warning { margin: 10px 0 22px; padding: 14px 16px; border-left: 3px solid #bc8720; background: #fff5df; color: #5a461c; font-size: 14px; }
+.practice-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; align-items: start; }
+.practice-main { display: grid; gap: 12px; min-width: 0; }
+.practice-section, .aside-card { padding: 20px; }
+.practice-section { min-width: 0; }
+.practice-section > .eyebrow { font-size: 10px; }
+.practice-section h2, .aside-card h2 { margin: 4px 0 10px; font-size: 20px; letter-spacing: -.035em; }
+.practice-section p { color: var(--muted); }
+.practice-section code { overflow-wrap: anywhere; }
+.callout { padding: 12px 14px; border-left: 2px solid var(--blue); background: var(--blue-soft); font-size: 14px; }
+.contract-table-wrap, .schema-scroll { overflow-x: auto; }
+.contract-table, .schema-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+.contract-table th, .contract-table td, .schema-table th, .schema-table td { padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.contract-table th, .schema-table th { color: var(--muted); font-size: 11px; font-weight: 650; white-space: nowrap; }
+.contract-table td:nth-child(2), .schema-table td:first-child { white-space: nowrap; }
+.method { display: inline-block; min-width: 60px; text-align: center; border-radius: 2px; padding: 3px 5px; background: var(--surface-soft); font: 700 10px var(--mono); }
+.method.get { color: #165a36; background: #e9f6ee; }.method.post { color: #183eac; background: var(--blue-soft); }.method.patch { color: #725300; background: #fff3d2; }.method.delete { color: #a8332a; background: var(--red-soft); }
+details { border-top: 1px solid var(--line); margin-top: 12px; padding-top: 12px; }
+summary { cursor: pointer; font-weight: 650; min-height: 44px; display: flex; align-items: center; }
+.timeline { display: grid; gap: 0; list-style: none; padding: 0; margin: 12px 0 0; counter-reset: time; }
+.timeline li { position: relative; display: grid; gap: 3px; padding: 12px 0 12px 34px; border-top: 1px solid var(--line); counter-increment: time; }
+.timeline li::before { content: counter(time, decimal-leading-zero); position: absolute; left: 0; top: 13px; color: var(--blue); font: 12px var(--mono); }
+.timeline b { font-size: 14px; }.timeline span { color: var(--muted); font-size: 13px; }
+.plain-list { padding-left: 20px; color: var(--muted); }.plain-list li { margin: 8px 0; }
+.practice-aside { display: grid; gap: 12px; }
+.aside-card { position: sticky; top: 88px; }
+.practice-aside .aside-card:not(:first-child) { position: static; }
+.aside-card h2 { font-size: 17px; margin-top: 12px; }
+.aside-card p, .aside-card li { color: var(--muted); font-size: 13px; }
+.aside-card ol { padding-left: 18px; }.aside-card li { margin: 6px 0; }
+.aside-card pre, .starter-code { overflow: auto; padding: 12px; background: #171a21; color: #edf0f7; font: 11px/1.6 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.starter-code { font-size: 12px; }
+.aside-card a:not(.btn) { text-underline-offset: 3px; text-decoration-color: var(--blue); }
+@media (max-width: 850px) { .practice-layout { grid-template-columns: 1fr; }.practice-aside { grid-template-columns: repeat(2,minmax(0,1fr)); }.aside-card { position: static; } }
+@media (max-width: 560px) { .practice-page { padding-top: 28px; }.practice-section, .aside-card { padding: 15px; }.practice-aside { grid-template-columns: 1fr; }.contract-table { min-width: 600px; }.schema-table { min-width: 570px; } }

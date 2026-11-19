@@ -1,0 +1,38 @@
+:root {
+  color-scheme: light;
+  --page: #fafaf8;
+  --surface: #ffffff;
+  --surface-soft: #f1f3f6;
+  --ink: #161616;
+  --muted: #5b606b;
+  --line: #d9dce2;
+  --blue: #2457f5;
+  --blue-soft: #eaf0ff;
+  --green: #17633a;
+  --green-soft: #e9f6ee;
+  --red: #a8332a;
+  --red-soft: #fff0ee;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans: "Be Vietnam Pro", Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --content: 77.5rem;
+  --radius-pill: 999px;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--page);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: var(--page); color: var(--ink); font-size: 16px; line-height: 1.55; }
+button, input, select, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; }
+code, pre, .mono { font-family: var(--mono); }
+::selection { background: var(--blue-soft); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
