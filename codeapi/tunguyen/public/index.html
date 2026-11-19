@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Quản lý sản phẩm — bài thực hành CRUD của Tú Nguyễn.">
+  <title>Quản lý sản phẩm · Tú Nguyễn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/common.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Bỏ qua nội dung đầu trang</a>
+  <header class="site-header"><nav class="nav" aria-label="Điều hướng chính">
+    <a class="brand" href="/">VIC <span>API &amp; Git Lab</span></a>
+    <div class="nav-links"><a href="/">Trang chủ</a><a href="/practice/">Đề thực hành</a></div>
+    <span class="nav-tag">BÀI CỦA TÚ NGUYỄN</span>
+  </nav></header>
+  <main class="container page" id="main-content">
+    <section class="hero">
+      <div class="hero-copy"><span class="eyebrow">PRODUCTS · CRUD DASHBOARD</span><h1>Quản lý sản phẩm<span class="accent">.</span></h1>
+        <p>Thêm, cập nhật và theo dõi sản phẩm trong một giao diện gọn gàng.</p>
+        <div class="hero-actions"><button class="btn btn-primary" id="show-create" type="button"><span aria-hidden="true">＋</span> Thêm sản phẩm</button><button class="btn btn-secondary" id="refresh-products" type="button"><span aria-hidden="true">↻</span> Tải lại</button></div>
+      </div><div class="hero-mark" aria-hidden="true"><span>↗</span><small>STORE<br>MANAGER</small></div>
+    </section>
+    <section class="stats" aria-label="Tổng quan sản phẩm">
+      <article class="stat-card"><span class="stat-icon violet">▦</span><div><p>Tổng sản phẩm</p><strong id="total-products">—</strong></div></article>
+      <article class="stat-card"><span class="stat-icon orange">◈</span><div><p>Tổng tồn kho</p><strong id="total-stock">—</strong></div></article>
+      <article class="stat-card"><span class="stat-icon green">₫</span><div><p>Giá trị niêm yết</p><strong id="total-value">—</strong></div></article>
+    </section>
+    <section class="panel catalog" aria-labelledby="catalog-title">
+      <div class="catalog-heading"><div><span class="eyebrow">DANH MỤC</span><h2 id="catalog-title">Kho sản phẩm</h2></div><span class="live-indicator"><i></i> Dữ liệu trực tiếp</span></div>
+      <div class="status" id="app-status" role="status" aria-live="polite">Đang tải sản phẩm…</div>
+      <div class="table-wrap"><table><thead><tr><th>Sản phẩm</th><th>Mã sản phẩm</th><th>Đơn giá</th><th>Tồn kho</th><th class="actions-head">Thao tác</th></tr></thead><tbody id="product-list"></tbody></table></div>
+      <div class="empty-state" id="empty-state" hidden><div class="empty-icon">▧</div><h3>Chưa có sản phẩm</h3><p>Thêm sản phẩm đầu tiên để bắt đầu quản lý kho.</p><button class="btn btn-secondary" id="empty-create" type="button">＋ Thêm sản phẩm</button></div>
+      <footer class="catalog-footer"><span id="result-count">Đang đồng bộ dữ liệu</span><span>Đồng bộ từ API · <code>/api/products</code></span></footer>
+    </section>
+    <p class="page-note">Các thay đổi được chia sẻ trong môi trường thực hành. Vui lòng kiểm tra kỹ trước khi xóa sản phẩm.</p>
+  </main>
+  <dialog id="product-dialog" class="product-dialog" aria-labelledby="form-title">
+    <form id="product-form" novalidate>
+      <div class="dialog-heading"><div><span class="eyebrow">THÔNG TIN SẢN PHẨM</span><h2 id="form-title">Thêm sản phẩm</h2></div><button class="icon-button" id="close-form" type="button" aria-label="Đóng">×</button></div>
+      <input id="editing-id" type="hidden">
+      <label for="name">Tên sản phẩm</label><input id="name" name="name" type="text" maxlength="150" placeholder="Ví dụ: Bình giữ nhiệt" required>
+      <div class="form-row"><div><label for="price">Đơn giá <span>(VND)</span></label><input id="price" name="price" type="number" min="0" max="2147483647" step="1" placeholder="0" required></div><div><label for="stock">Số lượng tồn</label><input id="stock" name="stock" type="number" min="0" max="2147483647" step="1" placeholder="0" required></div></div>
+      <p class="form-error" id="form-error" role="alert"></p>
+      <div class="dialog-actions"><button class="btn btn-secondary" id="cancel-form" type="button">Hủy</button><button class="btn btn-primary" id="save-product" type="submit">Lưu sản phẩm</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
