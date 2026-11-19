@@ -31,7 +31,8 @@ export async function discoverMembers(rootDirectory) {
       if (!memberStat.isDirectory() || memberStat.isSymbolicLink()) continue;
       if (!publicStat.isDirectory() || publicStat.isSymbolicLink()) continue;
       if (!indexStat.isFile() || indexStat.isSymbolicLink()) continue;
-      members.push({ slug: entry.name, name: entry.name.replaceAll('-', ' ') });
+      // Dùng nguyên tên folder làm tên hiển thị trên trang chủ.
+      members.push({ slug: entry.name, name: entry.name });
     } catch {
       // A partial or invalid member folder is omitted without breaking the gallery.
     }
