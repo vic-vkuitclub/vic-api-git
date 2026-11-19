@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bài cá nhân Thưởng · CRUD products</title>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/common.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <a href="/">← Trang chủ</a>
+    <h1>Bài cá nhân Thưởng · Products</h1>
+    <p>GET để xem, POST để thêm, PATCH để sửa, DELETE để xóa.</p>
+    <p class="notice">Dữ liệu thật dùng chung cả CLB. Thêm/sửa/xóa ở đây sẽ ảnh hưởng tới mọi người. Bấm tải lại để thấy thay đổi mới.</p>
+    <p id="status" role="status" aria-live="polite">Đang chuẩn bị tải dữ liệu…</p>
+
+    <fieldset id="workspace">
+      <legend class="visually-hidden">Quản lý sản phẩm</legend>
+      <form id="product-form" class="panel">
+        <h2 id="form-title">Thêm sản phẩm</h2>
+        <label for="name">Tên sản phẩm</label>
+        <input id="name" required maxlength="150" autocomplete="off">
+        <label for="price">Giá (VND)</label>
+        <input id="price" type="number" required min="0" max="2147483647" step="1">
+        <label for="stock">Tồn kho</label>
+        <input id="stock" type="number" required min="0" max="2147483647" step="1">
+        <div class="actions">
+          <button class="btn" type="submit">Lưu sản phẩm</button>
+          <button class="btn btn-secondary" id="cancel-edit" type="button" hidden>Hủy sửa</button>
+        </div>
+      </form>
+      <div class="actions">
+        <h2>Danh sách sản phẩm</h2>
+        <button class="btn btn-secondary" id="reload" type="button">Tải lại dữ liệu</button>
+      </div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Danh sách sản phẩm có thể cuộn ngang">
+        <table>
+          <thead><tr><th>ID</th><th>Tên</th><th>Giá (VND)</th><th>Tồn kho</th><th>Thao tác</th></tr></thead>
+          <tbody id="products-body"><tr><td colspan="5">Đang tải…</td></tr></tbody>
+        </table>
+      </div>
+    </fieldset>
+    <p><a href="/practice/">Xem đề thực hành và hợp đồng API</a></p>
+  </main>
+</body>
+</html>
