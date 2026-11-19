@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bin · Quản lý sản phẩm</title>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/common.css">
+  <link rel="stylesheet" href="./style.css">
+  <!-- Bốn hàm fetch và xử lý nút nằm trong app.js. -->
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+  <header class="bin-header container">
+    <a class="brand" href="/">VIC <span>Lab</span></a>
+    <a href="/practice/">Đề thực hành ↗</a>
+  </header>
+  <main id="main" class="container">
+    <section class="intro">
+      <div><span class="eyebrow">BIN / Bài thực hành API</span><h1>Góc sản phẩm.</h1><p>Thêm một sản phẩm, chỉnh thông tin và xem dữ liệu mới nhất.</p></div>
+      <span class="pill pill-blue">GET · POST · PATCH · DELETE</span>
+    </section>
+    <p class="notice"><strong>Database chung của CLB.</strong> Thêm, sửa hoặc xóa sẽ thay đổi dữ liệu thật. Tải lại để thấy thay đổi của mọi người.</p>
+    <p id="status" role="status" aria-live="polite">Đang chuẩn bị tải dữ liệu…</p>
+
+    <!-- app.js khóa fieldset trong lúc chờ API để tránh gửi lặp. -->
+    <fieldset id="workspace">
+      <legend class="visually-hidden">Quản lý sản phẩm</legend>
+      <div class="workspace-grid">
+        <!-- CỘT TRÁI: một form dùng cho cả POST thêm và PATCH sửa. -->
+        <form id="product-form" class="editor">
+          <span class="eyebrow">01 / Biên tập</span>
+          <h2 id="form-title">Thêm sản phẩm</h2>
+          <p class="muted">Điền ba thông tin bên dưới rồi bấm Lưu.</p>
+          <label for="name">Tên sản phẩm</label>
+          <input id="name" required maxlength="150" autocomplete="off" placeholder="Ví dụ: Trà đào">
+          <label for="price">Giá (VND)</label>
+          <input id="price" type="number" required min="0" max="2147483647" step="1" placeholder="25000">
+          <label for="stock">Tồn kho</label>
+          <input id="stock" type="number" required min="0" max="2147483647" step="1" placeholder="20">
+          <div class="form-actions">
+            <!-- Submit chọn createProduct hoặc updateProduct theo editingId. -->
+            <button class="btn" type="submit">Lưu sản phẩm</button>
+            <button class="btn btn-secondary" id="cancel-edit" type="button" hidden>Hủy sửa</button>
+          </div>
+          <p class="form-note">ID được cấp tự động khi tạo sản phẩm.</p>
+        </form>
+
+        <!-- CỘT PHẢI: response GET được render thành bảng, có nút Sửa/Xóa từng hàng. -->
+        <section class="catalog" aria-labelledby="catalog-title">
+          <div class="catalog-heading">
+            <div><span class="eyebrow">02 / Danh sách chung</span><h2 id="catalog-title">Sản phẩm hiện có</h2></div>
+            <button class="btn btn-secondary btn-small" id="reload" type="button">Tải lại dữ liệu</button>
+          </div>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Bảng sản phẩm có thể cuộn ngang">
+            <table>
+              <thead><tr><th>ID</th><th>Tên</th><th>Giá (VND)</th><th>Tồn kho</th><th>Thao tác</th></tr></thead>
+              <tbody id="products-body"><tr><td colspan="5">Đang tải…</td></tr></tbody>
+            </table>
+          </div>
+          <p class="table-note">Chọn <strong>Sửa</strong> để điền thông tin vào form. Thao tác <strong>Xóa</strong> luôn cần xác nhận.</p>
+        </section>
+      </div>
+    </fieldset>
+  </main>
+  <footer class="container">Bin · Products CRUD <span>Browser → Node.js → Supabase</span></footer>
+</body>
+</html>
